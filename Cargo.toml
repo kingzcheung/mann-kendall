@@ -9,7 +9,7 @@ license = "MIT"
 
 [dependencies]
 distrs = "0.1"
-libc = "*"
+libc = "~0.2"
 
 [build-dependencies]
 cbindgen = "~0.23"
