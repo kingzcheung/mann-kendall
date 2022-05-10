@@ -7,7 +7,9 @@
 #include <stdarg.h>
 #include <stdlib.h>
 
-#include "mann_kendall.h"
+extern "C" {
+	#include "mann_kendall.h"
+}
 
 #pragma comment(lib, "../../target/debug/libmann_kendall.dylib")
 
