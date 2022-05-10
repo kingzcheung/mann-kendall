@@ -2,8 +2,8 @@
 use libc::size_t;
 use std::slice;
 
-pub mod mann_kendall;
-pub use mann_kendall::test;
+pub mod mk;
+pub use mk::test;
 
 
 #[repr(C)]
@@ -26,17 +26,3 @@ pub unsafe extern "C" fn mann_kendall_test(ptr: *mut f32, len: size_t  ,alpha:f6
     
 }
 
-/// # Safety
-/// 曼－肯德尔趋势检验
-/// 
-#[no_mangle]
-pub unsafe extern "C" fn mann_kendall(ptr: *mut f32, len: size_t  ,alpha:f64) ->f64{
-    let len = len as usize;
-    let v = slice::from_raw_parts_mut(ptr, len);
-    // let v = Vec::from_raw_parts(ptr, len, len);
-    let v = v.to_vec();
-    let (_,r,_) = test(v, alpha);
-
-    r
-    
-}

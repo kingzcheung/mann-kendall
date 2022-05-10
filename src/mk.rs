@@ -100,7 +100,7 @@ fn sign(x: f32) -> i32 {
 
 /// unique_and_counts 返回vec 的唯一，还会返回每个值出现的次数
 /// 默认为升序
-pub(super) fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
+pub fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
     let mut uniquex: Vec<f32> = Vec::new();
     let mut counts: Vec<i32> = Vec::new();
 

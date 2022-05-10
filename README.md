@@ -1,16 +1,19 @@
 
 ## Usage/Examples
 
+### install
+
+```yaml
+[dependencies]
+mann_kendall = "0.1"
+
+```
+
 ### build
 本地编译
 
 ```shell
 cargo build
-```
-
-交叉编译导出静态/动态库 
-```shell
-make rv1126 
 ```
 
 ### rust usage

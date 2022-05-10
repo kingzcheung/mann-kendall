@@ -3,8 +3,8 @@
 mod tests {
     use std::vec;
 
-    use mann_kendall::mann_kendall::{VecExt, unique_and_counts};
-    use mann_kendall::mann_kendall::test as mann_kendall_test;
+    use mann_kendall::mk::{VecExt, unique_and_counts};
+    use mann_kendall::mk::test as mann_kendall_test;
     #[test]
     fn test_unique_and_counts() {
         let data: Vec<f32> = vec![5., 1., 1., 2., 3., 4.];

@@ -12,10 +12,3 @@ typedef struct Trend {
  * # Safety
  */
 struct Trend mann_kendall_test(float *ptr, size_t len, double alpha);
-
-/**
- * # Safety
- * 曼－肯德尔趋势检验
- *
- */
-double mann_kendall(float *ptr, size_t len, double alpha);
