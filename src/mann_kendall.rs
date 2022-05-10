@@ -2,7 +2,7 @@ use std::ops::{Add, Sub, Mul};
 use distrs::Normal;
 
 #[derive(Debug,PartialEq, PartialOrd)]
-struct VecExt(Vec<i32>);
+pub struct VecExt(pub Vec<i32>);
 
 impl VecExt {
     pub fn sum(&self) ->i32 {
@@ -100,7 +100,7 @@ fn sign(x: f32) -> i32 {
 
 /// unique_and_counts 返回vec 的唯一，还会返回每个值出现的次数
 /// 默认为升序
-fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
+pub fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
     let mut uniquex: Vec<f32> = Vec::new();
     let mut counts: Vec<i32> = Vec::new();
 
@@ -139,7 +139,7 @@ fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
 /// 
 /// z: 归一化检验统计,检验统计量
 /// h: True（如果趋势存在）或 False（如果趋势不存在）
-pub fn mann_kendall_test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
+pub fn test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
     
     let n = x.len();
     let mut s = 0;

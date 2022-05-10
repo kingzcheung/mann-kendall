@@ -4,6 +4,7 @@ use std::env;
 
 fn main() {
     let crate_dir = env::var("CARGO_MANIFEST_DIR").unwrap();
+    println!("{}",crate_dir);
     let file_name = "cbindgen.toml";
     let config = cbindgen::Config::from_file(file_name).unwrap();
 

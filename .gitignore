@@ -2,3 +2,5 @@
 /Cargo.lock
 /.idea
 /.vscode
+examples/.DS_Store
+.DS_Store

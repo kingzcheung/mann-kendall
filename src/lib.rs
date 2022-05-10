@@ -3,7 +3,7 @@ use libc::size_t;
 use std::slice;
 
 pub mod mann_kendall;
-pub use mann_kendall::mann_kendall_test;
+pub use mann_kendall::test;
 
 
 #[repr(C)]
@@ -20,7 +20,7 @@ pub unsafe extern "C" fn mann_kendall_a(ptr: *mut f32, len: size_t  ,alpha:f64) 
     let v = slice::from_raw_parts_mut(ptr, len);
     // let v = Vec::from_raw_parts(ptr, len, len);
     let v = v.to_vec();
-    let (z,h) = mann_kendall_test(v, alpha);
+    let (z,h) = test(v, alpha);
 
     Trend { norm_stat: z, is_present: h}
     
@@ -35,7 +35,7 @@ pub unsafe extern "C" fn mann_kendall(ptr: *mut f32, len: size_t  ,alpha:f64) ->
     let v = slice::from_raw_parts_mut(ptr, len);
     // let v = Vec::from_raw_parts(ptr, len, len);
     let v = v.to_vec();
-    let (r,_) = mann_kendall_test(v, alpha);
+    let (r,_) = test(v, alpha);
 
     r
     
