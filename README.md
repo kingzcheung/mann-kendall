@@ -30,9 +30,9 @@ fn main() {
 
 ### cpp usage
 
-详见 [examples])(./examples/cpp) 
+详见 [examples](./examples/cpp) 
 
-```c++
+```cpp
 
 extern "C"
 {
