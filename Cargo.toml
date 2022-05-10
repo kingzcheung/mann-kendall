@@ -1,0 +1,21 @@
+[package]
+name = "mann_kendall"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+distrs = "0.1"
+libc = "*"
+
+[build-dependencies]
+cbindgen = "~0.23"
+
+[[example]]
+name = "simple"
+path = "examples/simple/main.rs"
+
+[lib]
+name = "mann_kendall"
+crate-type = ["staticlib","cdylib","rlib"]
