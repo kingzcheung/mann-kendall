@@ -1,6 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/kingzcheung/rust/mann-kendall'
-make: Leaving directory `/Users/kingzcheung/rust/mann-kendall'
- 
-make: *** No targets.  Stop.
-
