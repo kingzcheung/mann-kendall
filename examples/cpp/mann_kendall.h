@@ -11,7 +11,7 @@ typedef struct Trend {
 /**
  * # Safety
  */
-struct Trend mann_kendall_a(float *ptr, size_t len, double alpha);
+struct Trend mann_kendall_test(float *ptr, size_t len, double alpha);
 
 /**
  * # Safety

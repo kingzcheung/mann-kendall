@@ -15,7 +15,7 @@ pub struct Trend {
 
 /// # Safety
 #[no_mangle]
-pub unsafe extern "C" fn mann_kendall_a(ptr: *mut f32, len: size_t  ,alpha:f64) ->Trend{
+pub unsafe extern "C" fn mann_kendall_test(ptr: *mut f32, len: size_t  ,alpha:f64) ->Trend{
     let len = len as usize;
     let v = slice::from_raw_parts_mut(ptr, len);
     // let v = Vec::from_raw_parts(ptr, len, len);
