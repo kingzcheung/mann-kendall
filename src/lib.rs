@@ -1,6 +1,7 @@
 use std::ops::{Add, Sub, Mul};
 use distrs::Normal;
 use libc::size_t;
+use std::slice;
 
 #[derive(Debug,PartialEq, PartialOrd)]
 struct VecExt(Vec<i32>);
@@ -140,7 +141,9 @@ fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
 #[no_mangle]
 pub unsafe extern "C" fn mann_kendall(ptr: *mut f32, len: size_t  ,alpha:f64) ->f64{
     let len = len as usize;
-    let v = Vec::from_raw_parts(ptr, len, len);
+    let v = slice::from_raw_parts_mut(ptr, len);
+    // let v = Vec::from_raw_parts(ptr, len, len);
+    let v = v.to_vec();
     let (r,_) = mann_kendall_test(v, alpha);
 
     r
