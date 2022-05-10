@@ -135,6 +135,26 @@ fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
     (uniquex, counts)
 }
 
+#[repr(C)]
+#[derive(Debug)]
+pub struct Trend {
+    pub norm_stat: f64,
+    pub is_present: bool
+}
+
+/// # Safety
+#[no_mangle]
+pub unsafe extern "C" fn mann_kendall_a(ptr: *mut f32, len: size_t  ,alpha:f64) ->Trend{
+    let len = len as usize;
+    let v = slice::from_raw_parts_mut(ptr, len);
+    // let v = Vec::from_raw_parts(ptr, len, len);
+    let v = v.to_vec();
+    let (z,h) = mann_kendall_test(v, alpha);
+
+    Trend { norm_stat: z, is_present: h}
+    
+}
+
 /// # Safety
 /// 曼－肯德尔趋势检验
 /// 
@@ -154,7 +174,7 @@ pub unsafe extern "C" fn mann_kendall(ptr: *mut f32, len: size_t  ,alpha:f64) ->
 
 /// 返回元组 (z,h)
 /// 
-/// z: 归一化检验统计 
+/// z: 归一化检验统计,检验统计量
 /// h: True（如果趋势存在）或 False（如果趋势不存在）
 pub fn mann_kendall_test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
     
@@ -183,19 +203,20 @@ pub fn mann_kendall_test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
     };
 
     let z = match s.cmp(&0) {
-        std::cmp::Ordering::Less => (s+1) as f64 / (var_s as f64).sqrt(),
+        std::cmp::Ordering::Less => (s+1) as f64 / ((var_s as f64).sqrt()),
         std::cmp::Ordering::Equal => 0.0,
-        std::cmp::Ordering::Greater => (s - 1) as f64 / (var_s as f64).sqrt(),
+        std::cmp::Ordering::Greater => (s - 1) as f64 / ( (var_s as f64).sqrt() ),
     };
     
+    //  h = abs(z) > norm.ppf(1-alpha/2)
     let h = z.abs() > ppf(1f64 - alpha / 2f64);
-
+    println!(">>> {}",  Normal::pdf(0.975, 0f64, 0f64));
     (z,h)
 }
 
 /// Percent point function 分位点函数/标准偏差乘数
 fn ppf(x: f64) ->f64{
-    Normal::pdf(x, 0f64, 0f64)
+    Normal::pdf(x, 0f64, 1f64)
 }
 
 #[cfg(test)]

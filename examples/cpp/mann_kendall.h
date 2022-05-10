@@ -3,6 +3,16 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+typedef struct Trend {
+  double norm_stat;
+  bool is_present;
+} Trend;
+
+/**
+ * # Safety
+ */
+struct Trend mann_kendall_a(float *ptr, size_t len, double alpha);
+
 /**
  * # Safety
  * 曼－肯德尔趋势检验
