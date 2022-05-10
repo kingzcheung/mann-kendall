@@ -100,7 +100,7 @@ fn sign(x: f32) -> i32 {
 
 /// unique_and_counts 返回vec 的唯一，还会返回每个值出现的次数
 /// 默认为升序
-pub fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
+pub(super) fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
     let mut uniquex: Vec<f32> = Vec::new();
     let mut counts: Vec<i32> = Vec::new();
 
@@ -139,7 +139,7 @@ pub fn unique_and_counts(mut x: Vec<f32>) -> (Vec<f32>, Vec<i32>) {
 /// 
 /// z: 归一化检验统计,检验统计量
 /// h: True（如果趋势存在）或 False（如果趋势不存在）
-pub fn test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
+pub fn test(x: Vec<f32>,alpha:f64) ->(f64,f64,bool) {
     
     let n = x.len();
     let mut s = 0;
@@ -170,10 +170,13 @@ pub fn test(x: Vec<f32>,alpha:f64) ->(f64,bool) {
         std::cmp::Ordering::Equal => 0.0,
         std::cmp::Ordering::Greater => (s - 1) as f64 / ( (var_s as f64).sqrt() ),
     };
+
+    // p = 2*(1-norm.cdf(abs(z))) 
+    let p = 2f64 * ( 1f64 - Normal::cdf(z.abs(), 0f64, 1f64) );
     
     //  h = abs(z) > norm.ppf(1-alpha/2)
     let h = z.abs() > ppf(1f64 - alpha / 2f64);
-    (z,h)
+    (p,z,h)
 }
 
 /// Percent point function 分位点函数/标准偏差乘数
